@@ -2,6 +2,12 @@
 
 [![donation link](https://img.shields.io/badge/buy%20me%20a%20coffee-square-blue)](https://buymeacoffee.aspiesoft.com)
 
+A default config for new cloudflare domains.
+
+I recommend forking this repo and changing the config to your liking.
+
+> note: you will also need to install the [terraform](https://developer.hashicorp.com/terraform/downloads) cli.
+
 ## Installation
 
 ```shell script
