@@ -15,7 +15,6 @@ variable "zone_id" {
   default = "<Insert Zone ID>"
 }
 
-
 resource "cloudflare_zone_settings_override" "settings" {
   zone_id = var.zone_id
 

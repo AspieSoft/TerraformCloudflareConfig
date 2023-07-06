@@ -19,3 +19,5 @@ git clone https://github.com/AspieSoft/TerraformCloudflareConfig.git
 ## Setup
 
 Add your `api_token` and `zone_id` to cloudflare.tf, then run `TerraformCloudflareConfig/run.sh` to update the config for that domain.
+
+Note: if you leave the `zone_id` set to `"<Insert Zone ID>"`, you will automatically be prompted to enter a `zone_id` by the `run.sh` script.
