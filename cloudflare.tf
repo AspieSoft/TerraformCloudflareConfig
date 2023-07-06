@@ -15,12 +15,8 @@ variable "zone_id" {
   default = "<Insert Zone ID>"
 }
 
-variable "domain" {
-  default = "aspiemail.com"
-}
 
 resource "cloudflare_zone_settings_override" "settings" {
-  # name = var.domain
   zone_id = var.zone_id
 
   settings {
