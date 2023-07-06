@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "cloudflare" {
-  # api_token = "export CLOUDFLARE_API_TOKEN=\"<Insert API Token>\" > .zshrc"
+  # api_token = "export CLOUDFLARE_API_TOKEN=\"<Insert API Token>\" >> .zshrc"
 }
 
 variable "zone_id" {
