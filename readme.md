@@ -6,9 +6,7 @@ A default config for new cloudflare domains.
 
 I recommend forking this repo and changing the config to your liking.
 
-Note: you will also need to install the [terraform](https://developer.hashicorp.com/terraform/downloads) cli for linux.
-
-> Notice: `run.sh` assumes you are using linux.
+Note: you will also need to install the [terraform](https://developer.hashicorp.com/terraform/downloads) cli.
 
 ## Installation
 
