@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"regexp"
 	"strings"
 )
 
@@ -17,7 +18,23 @@ func main(){
 		panic(err)
 	}
 
+	oldFile := file
+
 	hasModifiedFile := false
+	if stat, err := os.Stat("cloudflare_api_token.key"); err == nil && !stat.IsDir() {
+		key, err := os.ReadFile("cloudflare_api_token.key")
+		if err != nil {
+			panic(err)
+		}
+		key = bytes.TrimRight(key, "\r\n")
+
+		if len(key) != 0 {
+			hasModifiedFile = true
+			file = regexp.MustCompile(`#\s*api_token\s*=`).ReplaceAll(file, []byte("api_token ="))
+			file = bytes.ReplaceAll(file, []byte("<Insert Cloudflare API Token>"), key)
+		}
+	}
+
 	if bytes.Contains(file, []byte("<Insert Zone ID>")) {
 		reader := bufio.NewReader(os.Stdin)
 		fmt.Printf("Enter Zone ID: ")
@@ -32,9 +49,13 @@ func main(){
 			panic("error: Zone ID Not Specified")
 		}
 
-		os.WriteFile("", bytes.ReplaceAll(file, []byte("<Insert Zone ID>"), []byte(text)), 0644)
-
 		hasModifiedFile = true
+		file = bytes.ReplaceAll(file, []byte("<Insert Zone ID>"), []byte(text))
+	}
+
+	if hasModifiedFile {
+		os.WriteFile("cloudflare.tf", file, 0644)
+		defer os.WriteFile("cloudflare.tf", oldFile, 0644)
 	}
 
 	cmd := exec.Command(`terraform`, `init`)
@@ -60,7 +81,7 @@ func main(){
 	}
 
 	if hasModifiedFile {
-		os.WriteFile("", file, 0644)
+		os.WriteFile("cloudflare.tf", oldFile, 0644)
 		resetTerraform()
 	}
 }

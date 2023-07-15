@@ -16,8 +16,8 @@ Note: you will also need to install the [terraform](https://developer.hashicorp.
 git clone https://github.com/AspieSoft/TerraformCloudflareConfig.git
 ```
 
-## Setup
+## Setup and Usage
 
-Add your `api_token` and `zone_id` to cloudflare.tf, then run `TerraformCloudflareConfig/run.sh` to update the config for that domain.
-
-Note: if you leave the `zone_id` set to `"<Insert Zone ID>"`, you will automatically be prompted to enter a `zone_id` by the `run.sh` script.
+1. Generate a cloudflare api token with access to your cloudflare config.
+2. Set the key to an environment variable with the name `CLOUDFLARE_API_TOKEN` (in linux `echo 'export CLOUDFLARE_API_TOKEN="<Insert Cloudflare API Token>"' >> .zshrc`) or you can add it to a local file next to your cloudflare.tf file named `cloudflare_api_token.key`
+3. run `TerraformCloudflareConfig/run`, you may be propted to enter the Zone ID for the cloudflare domain you want to change
