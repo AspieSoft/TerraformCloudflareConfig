@@ -10,7 +10,7 @@ rm -f terraform.tfstate
 rm -f terraform.tfstate.backup
 
 if ! [ "$(grep '"<Insert Zone ID>"' 'cloudflare.tf')" = "" ]; then
-  read -p "Enter Zond ID: " zoneID
+  read -p "Enter Zone ID: " zoneID
   sed -r -i "s/\"<Insert Zone ID>\"/\"$zoneID\"/" 'cloudflare.tf'
 fi
 
