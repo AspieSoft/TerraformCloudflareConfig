@@ -24,7 +24,7 @@ resource "cloudflare_zone_settings_override" "settings" {
     ssl = "strict"
     # waf = "on"
 
-    always_online = "on"
+    always_online = "off"
     always_use_https = "on"
     brotli = "on"
     browser_cache_ttl = 43200
