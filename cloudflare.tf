@@ -21,7 +21,7 @@ resource "cloudflare_zone_settings_override" "settings" {
   settings {
     tls_1_3 = "on"
     automatic_https_rewrites = "on"
-    ssl = "full"
+    ssl = "strict"
     # waf = "on"
 
     always_online = "on"
