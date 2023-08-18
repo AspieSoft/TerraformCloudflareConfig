@@ -43,14 +43,14 @@ func main(){
 	}
 	
 	if bytes.Contains(file, []byte("<Insert Zone ID>")) {
-		if zoneListFile, err := os.ReadFile("zone.list"); err == nil {
+		if zoneListFile, err := os.ReadFile("zone.list"); err == nil && len(zoneListFile) != 0 && len(bytes.TrimRight(zoneListFile, "\r\n")) != 0 {
 			defer os.WriteFile("cloudflare.tf", oldFile, 0644)
 
 			curFile := file
 
 			zoneList := bytes.Split(zoneListFile, []byte{'\n'})
 			for _, zone := range zoneList {
-				zone = bytes.TrimRight(zone, "\r")
+				zone = bytes.TrimRight(zone, "\r\n")
 				if len(zone) == 0 {
 					break
 				}
