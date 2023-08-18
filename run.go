@@ -13,6 +13,13 @@ import (
 func main(){
 	resetTerraform()
 
+	autoYes := false
+	for _, arg := range os.Args[1:] {
+		if arg == "-y" || arg == "--autoyes" {
+			autoYes = true
+		}
+	}
+
 	file, err := os.ReadFile("cloudflare.tf")
 	if err != nil {
 		panic(err)
@@ -73,7 +80,12 @@ func main(){
 	}
 
 	if err == nil {
-		cmd = exec.Command(`terraform`, `apply`)
+		if autoYes {
+			cmd = exec.Command(`terraform`, `apply`, `-auto-approve`)
+		}else{
+			cmd = exec.Command(`terraform`, `apply`)
+		}
+
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
