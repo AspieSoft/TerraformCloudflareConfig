@@ -41,7 +41,7 @@ func main(){
 			file = bytes.ReplaceAll(file, []byte("<Insert Cloudflare API Token>"), key)
 		}
 	}
-	
+
 	if bytes.Contains(file, []byte("<Insert Zone ID>")) {
 		if zoneListFile, err := os.ReadFile("zone.list"); err == nil && len(zoneListFile) != 0 && len(bytes.TrimRight(zoneListFile, "\r\n")) != 0 {
 			defer os.WriteFile("cloudflare.tf", oldFile, 0644)
