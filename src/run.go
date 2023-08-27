@@ -11,7 +11,6 @@ import (
 	"runtime"
 	"strings"
 
-	regex "github.com/AspieSoft/go-regex/v5/re2"
 	"github.com/klauspost/cpuid/v2"
 )
 
@@ -24,9 +23,9 @@ func main(){
 			panic(err)
 		}
 
-		if regex.Comp(`(?i)(^|[^A-Za-z])amd($|[^A-Za-z])`).Match([]byte(cpuid.CPU.BrandName)) {
+		if regexp.MustCompile(`(?i)(^|[^A-Za-z])amd($|[^A-Za-z])`).Match([]byte(cpuid.CPU.BrandName)) {
 			winDir = winPath+"/amd64"
-		}else if regex.Comp(`(?i)(^|[^A-Za-z])intel($|[^A-Za-z])`).Match([]byte(cpuid.CPU.BrandName)) {
+		}else if regexp.MustCompile(`(?i)(^|[^A-Za-z])amd($|[^A-Za-z])`).Match([]byte(cpuid.CPU.BrandName)) {
 			winDir = winPath+"/386"
 		}
 
